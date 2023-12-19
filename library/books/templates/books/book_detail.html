@@ -1,0 +1,48 @@
+{% extends "books/base.html" %}
+{% block content%}
+{% if user.is_authenticated %}
+<div class="card mb-3" style="max-width: 540px;position:relative;left:25%">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ object.book_image.url }}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{object.book_title}}</h5>
+        <p class="card-text">Author of this Book is {{object.book_author}}</p>
+        <p class="card-text"><small class="text-body-secondary">{%if object.is_available%}Book Is Available{%else%}Not AValialble{%endif%}</small></p>
+        <div>
+            <a class="btn btn-primary" href="{% url 'book-update' object.id %}" role="button">Update</a>
+            <a class="btn btn-danger" href="{% url 'book-delete' object.id %}" role="button">Delete</a>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<h1>Please Login to proceed</h1>
+{% endif %}
+{% endblock content %}
+
+{% block usercontent%}
+{% if user.is_authenticated %}
+<div class="card mb-3" style="max-width: 540px;position:relative;left:25%">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ object.book_image.url }}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{object.book_title}}</h5>
+        <p class="card-text">Author of this Book is {{object.book_author}}</p>
+        <div>
+            <a class="btn btn-secondary" href="{% url 'book-request' book.id %}" role="button">Request This Book</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<h1>Please Login to proceed</h1>
+{% endif %}
+{% endblock %}

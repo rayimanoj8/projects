@@ -1,0 +1,40 @@
+{% extends "books/base.html" %}
+{% load crispy_forms_tags %}
+{% block content%}
+<div class="card" style="width: 18rem;">
+    <img src="" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{user.username}}</h5>
+<!--      <p class="card-text">{{user.email}}</p>-->
+    </div>
+  </div>
+  <form method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Profile Info</legend>
+        {{ form|crispy}}
+    </fieldset>
+    <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Update</button>
+    </div>
+</form>
+{% endblock content %}
+{% block usercontent%}
+<div class="card" style="width: 18rem;">
+    <img src="" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{user.username}}</h5>
+<!--      <p class="card-text">{{user.email}}</p>-->
+    </div>
+  </div>
+  <form method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Profile Info</legend>
+        {{ form|crispy}}
+    </fieldset>
+    <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Update</button>
+    </div>
+</form>
+{% endblock usercontent %}

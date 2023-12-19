@@ -1,0 +1,99 @@
+{% extends "books/base.html" %}
+{% block content%}
+  {% if user.is_authenticated %}
+    {% for book in books %}
+        <div class="card mb-3" style="max-width: 540px;position:relative;left:25%">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="{{ book.book_image.url }}" class="img-fluid rounded-start" style="width:179px;height:236px;">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <a href="{% url 'book-detail' book.id %}" style="text-decoration:none"><h5 class="card-title">{{book.book_title}}</h5></a>
+                <p class="card-text">Author of this Book is {{book.book_author}}</p>
+                <p class="card-text"><small class="text-body-secondary">{%if book.is_available%}Is Available{%else%}Not Available at Present{%endif%}</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+    {% if is_paginated %}
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+
+    {% endif %}
+{% else %}
+{% endif %}
+{% endblock %}
+
+{% block usercontent %}
+{% if user.is_authenticated %}
+{% if messages %}
+{%for message in messages%}
+{% if message.tags == "success" %}
+        <div class="alert alert-success">
+          {{ message }}
+        </div>
+      {% else %}
+        <div class="alert alert-danger">
+          {{ message }}
+        </div>
+      {% endif %}
+    {%endfor%}
+    {%endif%}
+    {% for book in books %}
+        {% if book.is_available %}
+          <div class="card mb-3" style="max-width: 540px;position:relative;left:25%">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="{{ book.book_image.url }}" class="img-fluid rounded-start" style="width:179px;height:236px;">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <a href="{% url 'book-detail' book.id %}" style="text-decoration:none"><h5 class="card-title">{{book.book_title}}</h5></a>
+                  <p class="card-text">Author of this Book is {{book.book_author}}</p>
+                  <a class="btn btn-secondary" href="{% url 'book-request' book.id %}" role="button">Request This Book</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+    {% endfor %}
+    {% if is_paginated %}
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+
+    {% endif %}
+{% else %}
+{% endif %}
+{% endblock usercontent %}

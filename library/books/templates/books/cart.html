@@ -1,0 +1,48 @@
+{% extends 'books/base.html' %}
+{% block content %}
+    <table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">Book User</th>
+        <th scope="col">Book Name</th>
+        <th scope="col">Author</th>
+        <th scope="col">Return Date</th>
+    </tr>
+    </thead>
+    {% for item in bk_list %}
+      <tbody>
+        <tr>
+          <td>{{item.user_id.username}}</td>
+          <td>{{item.book_id.book_title}}</td>
+          <td>{{item.book_id.book_author}}</td>
+          <td>{{item.return_date}}</td>
+        </tr>
+      </tbody>
+    {% endfor %}
+</table>
+{% endblock content%}
+
+{% block usercontent %}
+<legend class="border-bottom mb-4">Click on Book Name to Request a return for that Book</legend>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">Book Name</th>
+        <th scope="col">Author</th>
+        <th scope="col">Return Date</th>
+    </tr>
+    </thead>
+    {% for item in bk_list %}
+      <tbody>
+        <tr>
+          <td>
+              <a href="{% url 'book-return' item.book_id.id %}" class="link-primary link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">
+                  {{item.book_id.book_title}}</a>
+          </td>
+          <td>{{item.book_id.book_author}}</td>
+          <td>{{item.return_date}}</td>
+        </tr>
+      </tbody>
+    {% endfor %}
+</table>
+{% endblock usercontent %}

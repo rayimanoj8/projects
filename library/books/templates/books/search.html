@@ -1,0 +1,38 @@
+{% extends "books/base.html" %}
+{% block content %}
+{% for book in search %}
+          <div class="card mb-3" style="max-width: 540px;position:relative;left:25%">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="{{ book.book_image.url }}" class="img-fluid rounded-start" style="width:179px;height:236px;">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <a href="{% url 'book-detail' book.id %}" style="text-decoration:none"><h5 class="card-title">{{book.book_title}}</h5></a>
+                  <p class="card-text">Author of this Book is {{book.book_author}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+{% endfor %}
+{% endblock content %}
+{% block usercontent%}
+    {% for book in search %}
+        {% if book.is_available %}
+          <div class="card mb-3" style="max-width: 540px;position:relative;left:25%">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="{{ book.book_image.url }}" class="img-fluid rounded-start" style="width:179px;height:236px;">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <a href="{% url 'book-detail' book.id %}" style="text-decoration:none"><h5 class="card-title">{{book.book_title}}</h5></a>
+                  <p class="card-text">Author of this Book is {{book.book_author}}</p>
+                  <a class="btn btn-secondary" href="{% url 'book-request' book.id %}" role="button">Request This Book</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+    {% endfor %}
+{% endblock usercontent %}
