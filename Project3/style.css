@@ -1,0 +1,28 @@
+h1{
+    text-align: center;
+}
+table {
+    border-collapse: collapse;
+    margin: auto;
+}
+td {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border: 1px solid black;
+}
+input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    font-size: 1.2em;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.center {
+    text-align: center;
+    margin-top: 20px; /* Adjust margin-top as needed */
+}
